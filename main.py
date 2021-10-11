@@ -12,6 +12,10 @@ import turtle
 BACKGROUND_COLOR = "white"
 WIDTH = 800
 HEIGHT = 600
+TOTAL_COLORS = 3
+RED_MODULUS = 1
+BLUE_MODULUS = 2
+GREEN_MODULUS = 0
 AXIS_COLOR = "black"
 
 
@@ -21,8 +25,15 @@ def get_color(equation_counter):
     :param equation_counter: Number x, for xth equation being drawn
     :return: A string color for turtle to use
     """
-    # DEFAULT return black, needs to be changed
-    return "black"
+    # calculates modulus using equation counter and total colours
+    modulus = equation_counter % TOTAL_COLORS
+    # returns alternate colors based on value of modulus
+    if modulus == RED_MODULUS:
+        return "red"
+    if modulus == BLUE_MODULUS:
+        return "blue"
+    if modulus == GREEN_MODULUS:
+        return "green"
 
 
 def calc_to_screen_coord(x, y, x_origin, y_origin, ratio):
