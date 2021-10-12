@@ -46,7 +46,10 @@ def calc_to_screen_coord(x, y, x_origin, y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: (screen_x, screen_y) pixel version of calculator (x,y)
     """
-    return -1, -1
+    # calculates screen x and screen y and returns those values
+    screen_x = x_origin + (x * ratio)
+    screen_y = y_origin + (y * ratio)
+    return screen_x, screen_y
 
 
 def calc_minmax_x(x_origin, ratio):
