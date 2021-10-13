@@ -5,7 +5,7 @@
 # Date: 2021/10/09
 # Description:
 
-# import math
+import math
 import turtle
 
 # Constants
@@ -61,7 +61,9 @@ def calc_minmax_x(x_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: (Smallest, Largest) x value to draw for a 0->WIDTH of screen
     """
-    return -1, -1
+    min_x = int(math.floor(-x_origin/ratio))
+    max_x = int(math.ceil(x_origin/ratio))
+    return min_x, max_x
 
 
 def calc_minmax_y(y_origin, ratio):
@@ -73,7 +75,9 @@ def calc_minmax_y(y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: (Smallest, Largest) y value to draw for a 0->HEIGHT of screen
     """
-    return -1, -1
+    min_y = int(math.floor(-y_origin/ratio))
+    max_y = int(math.ceil(y_origin/ratio))
+    return min_y, max_y
 
 
 def draw_line(pointer, screen_x1, screen_y1, screen_x2, screen_y2):
