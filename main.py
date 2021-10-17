@@ -16,6 +16,7 @@ TOTAL_COLORS = 3
 RED_MODULUS = 1
 BLUE_MODULUS = 2
 GREEN_MODULUS = 0
+HALF_OF_TICK = 5
 AXIS_COLOR = "black"
 
 
@@ -80,6 +81,7 @@ def calc_minmax_y(y_origin, ratio):
     return min_y, max_y
 
 
+
 def draw_line(pointer, screen_x1, screen_y1, screen_x2, screen_y2):
     """
     Draw a line between tow pixel coordinates (screen_x_1, screen_y_1) to (screen_x_2, screen_y_2)
@@ -105,7 +107,11 @@ def draw_x_axis_tick(pointer, screen_x, screen_y):
     :param screen_y: The pixel y of tick location on axis
     :return: None (just draws in turtle)
     """
-    pass
+    # defines start and end of tick
+    screen_y1 = screen_y + HALF_OF_TICK
+    screen_y2 = screen_y - HALF_OF_TICK
+    # draws tick on x-axis
+    draw_line(pointer, screen_x, screen_y1, screen_x, screen_y2)
 
 
 def draw_x_axis_label(pointer, screen_x, screen_y, label_text):
