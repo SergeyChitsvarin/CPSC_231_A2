@@ -53,6 +53,16 @@ def calc_to_screen_coord(x, y, x_origin, y_origin, ratio):
     return screen_x, screen_y
 
 
+def calculate_min_value(origin, ratio):
+    min_value = int(math.floor(-origin/ratio))
+    return min_value
+
+
+def calculate_max_value(origin, ratio):
+    max_value = int(math.ceil(origin/ratio))
+    return max_value
+
+
 def calc_minmax_x(x_origin, ratio):
     """
     Calculate smallest and largest calculator INTEGER x value to draw for a 0->WIDTH of screen
@@ -62,9 +72,8 @@ def calc_minmax_x(x_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: (Smallest, Largest) x value to draw for a 0->WIDTH of screen
     """
-    min_x = int(math.floor(-x_origin/ratio))
-    max_x = int(math.ceil(x_origin/ratio))
-    return min_x, max_x
+    # calculates min and max values and returns them for x
+    return calculate_min_value(x_origin, ratio), calculate_max_value(x_origin, ratio)
 
 
 def calc_minmax_y(y_origin, ratio):
@@ -76,10 +85,8 @@ def calc_minmax_y(y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: (Smallest, Largest) y value to draw for a 0->HEIGHT of screen
     """
-    min_y = int(math.floor(-y_origin/ratio))
-    max_y = int(math.ceil(y_origin/ratio))
-    return min_y, max_y
-
+    # calculates min and max values and returns them for y
+    return calculate_min_value(y_origin, ratio), calculate_max_value(y_origin, ratio)
 
 
 def draw_line(pointer, screen_x1, screen_y1, screen_x2, screen_y2):
