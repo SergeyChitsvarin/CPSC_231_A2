@@ -72,8 +72,10 @@ def calc_minmax_x(x_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: (Smallest, Largest) x value to draw for a 0->WIDTH of screen
     """
-    # calculates min and max values and returns them for x
-    return calculate_min_value(x_origin, ratio), calculate_max_value(x_origin, ratio)
+    # calculates min and max values and returns them for x axis
+    max_x_value = calculate_max_value(x_origin, ratio)
+    min_x_value = calculate_min_value(x_origin, ratio)
+    return min_x_value, max_x_value
 
 
 def calc_minmax_y(y_origin, ratio):
@@ -85,8 +87,10 @@ def calc_minmax_y(y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: (Smallest, Largest) y value to draw for a 0->HEIGHT of screen
     """
-    # calculates min and max values and returns them for y
-    return calculate_min_value(y_origin, ratio), calculate_max_value(y_origin, ratio)
+    # calculates min and max values and returns them for y axis
+    max_y_value = calculate_max_value(y_origin, ratio)
+    min_y_value = calculate_min_value(y_origin, ratio)
+    return min_y_value, max_y_value
 
 
 def draw_line(pointer, screen_x1, screen_y1, screen_x2, screen_y2):
@@ -129,8 +133,13 @@ def draw_x_axis_label(pointer, screen_x, screen_y, label_text):
     :param screen_y: The pixel y of tick location on axis
     :param label_text: The string label to draw
     :return: None (just draws in turtle)
+    references:
+    1)writing on screen in turtle https://stackoverflow.com/questions/15141031/python-turtle-draw-text-with-on-screen-with-larger-font
     """
-    pass
+    # this goes to specified x and y location and writes text below the x axis
+    pointer.penup()
+    pointer.goto(screen_x, screen_y-HALF_OF_TICK)
+    pointer.write(label_text)
 
 
 def draw_y_axis_tick(pointer, screen_x, screen_y):
