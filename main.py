@@ -150,7 +150,11 @@ def draw_y_axis_tick(pointer, screen_x, screen_y):
     :param screen_y: The pixel y of tick location on axis
     :return: None (just draws in turtle)
     """
-    pass
+    # defines start and end of tick
+    screen_x1 = screen_x - HALF_OF_TICK
+    screen_x2 = screen_x + HALF_OF_TICK
+    # draws tick on y-axis
+    draw_line(pointer, screen_x1, screen_y, screen_x2, screen_y)
 
 
 def draw_y_axis_label(pointer, screen_x, screen_y, label_text):
@@ -161,8 +165,13 @@ def draw_y_axis_label(pointer, screen_x, screen_y, label_text):
     :param screen_y: The pixel y of tick location on axis
     :param label_text: The string label to draw
     :return: None (just draws in turtle)
+    references:
+    1)writing on screen in turtle https://stackoverflow.com/questions/15141031/python-turtle-draw-text-with-on-screen-with-larger-font
     """
-    pass
+    # this goes to specified x and y location and writes text on the left side of y axis.
+    pointer.penup()
+    pointer.goto(screen_x - HALF_OF_TICK, screen_y)
+    pointer.write(label_text)
 
 
 def draw_x_axis(pointer, x_origin, y_origin, ratio):
