@@ -241,9 +241,16 @@ def draw_expression(pointer, expr, colour, x_origin, y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: None (just draws in turtle)
     """
-    pass
-
-
+    pointer.color(colour)
+    min_x, max_x = calc_minmax_x(x_origin, ratio)
+    x = min_x
+    while x <= max_x:
+        y = calc(expr, x)
+        screen_x, screen_y = calc_to_screen_coord(x, y, x_origin, y_origin, ratio)
+        pointer.goto(screen_x, screen_y)
+        pointer.pendown()
+        x = x + 1
+    pointer.penup()
 # YOU SHOULD NOT NEED TO CHANGE ANYTHING BELOW THIS LINE UNLESS YOU ARE DOING THE BONUS
 
 
