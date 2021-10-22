@@ -194,9 +194,12 @@ def draw_x_axis(pointer, x_origin, y_origin, ratio):
     x = min_x
     # loops until the x value is smaller or equal to max_x
     while x <= max_x:
+        # calculate screen_x and screen_y
         screen_x, screen_y = calc_to_screen_coord(x, ZERO, x_origin, y_origin, ratio)
+        # draws ticks and labels on x axis
         draw_x_axis_tick(pointer, screen_x, screen_y)
         draw_x_axis_label(pointer, screen_x, screen_y, x)
+        # jumps to next x
         x = x+1
 
 
@@ -209,7 +212,22 @@ def draw_y_axis(pointer, x_origin, y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: None (just draws in turtle)
     """
-    pass
+    # draw y axis
+    draw_line(pointer, x_origin, ZERO, x_origin, HEIGHT)
+
+    # calculates minimum and maximum y values
+    min_y, max_y = calc_minmax_y(y_origin, ratio)
+    # y begins at minimum y value
+    y = min_y
+    # loops until the y value is smaller or equal to max_y
+    while y <= max_y:
+        # calculate screen_x and screen_y
+        screen_x, screen_y = calc_to_screen_coord(ZERO, y, x_origin, y_origin, ratio)
+        # draws ticks and labels on y axis
+        draw_y_axis_tick(pointer, screen_x, screen_y)
+        draw_y_axis_label(pointer, screen_x, screen_y, y)
+        # jumps to next y
+        y = y+1
 
 
 def draw_expression(pointer, expr, colour, x_origin, y_origin, ratio):
@@ -271,7 +289,6 @@ def main():
     # Get configuration
     x_origin, y_origin = eval(input("Enter pixel coordinates of chart origin (x,y): "))
     ratio = int(input("Enter ratio of pixels per step: "))
-    draw_x_axis(pointer, x_origin, y_origin, ratio)
 
     # Draw axis
     pointer.color(AXIS_COLOR)
