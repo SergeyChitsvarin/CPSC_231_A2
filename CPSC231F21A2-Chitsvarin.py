@@ -58,12 +58,14 @@ def calc_to_screen_coord(x, y, x_origin, y_origin, ratio):
 
 
 def calculate_min_value(origin, ratio):
-    min_value = int(floor(-origin/ratio))
+    x = (ZERO - origin)/ratio
+    min_value = int(floor(x))
     return min_value
 
 
 def calculate_max_value(origin, ratio):
-    max_value = int(ceil(origin/ratio))
+    x = (WIDTH - origin)/ratio
+    max_value = int(ceil(x))
     return max_value
 
 
@@ -77,8 +79,10 @@ def calc_minmax_x(x_origin, ratio):
     :return: (Smallest, Largest) x value to draw for a 0->WIDTH of screen
     """
     # calculates min and max values and returns them for x axis
-    max_x_value = calculate_max_value(x_origin, ratio)
+
     min_x_value = calculate_min_value(x_origin, ratio)
+    max_x_value = calculate_max_value(x_origin, ratio)
+
     return min_x_value, max_x_value
 
 
