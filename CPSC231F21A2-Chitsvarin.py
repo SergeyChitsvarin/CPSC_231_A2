@@ -275,7 +275,7 @@ def draw_expression(pointer, expr, colour, x_origin, y_origin, ratio):
         pointer.pendown()
         # uses delta of 0.1 to make change to a different x smooth
         x = x + 0.1
-    # after finishing drawing the expressions moves the pen up
+    # after finishing drawing the expression moves the pen up
     pointer.penup()
 # YOU SHOULD NOT NEED TO CHANGE ANYTHING BELOW THIS LINE UNLESS YOU ARE DOING THE BONUS
 
