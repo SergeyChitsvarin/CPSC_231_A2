@@ -17,6 +17,8 @@ RED_MODULUS = 1
 BLUE_MODULUS = 2
 GREEN_MODULUS = 0
 HALF_OF_TICK = 5
+ZERO = 0
+LABEL_FROM_AXIS = 20
 AXIS_COLOR = "black"
 
 
@@ -135,11 +137,12 @@ def draw_x_axis_label(pointer, screen_x, screen_y, label_text):
     :return: None (just draws in turtle)
     references:
     1)writing on screen in turtle https://stackoverflow.com/questions/15141031/python-turtle-draw-text-with-on-screen-with-larger-font
+    2) align text to centre in turtle https://stackoverflow.com/questions/42265682/how-to-center-text-using-turtle-module-in-python
     """
     # this goes to specified x and y location and writes text below the x axis
     pointer.penup()
-    pointer.goto(screen_x, screen_y-HALF_OF_TICK)
-    pointer.write(label_text)
+    pointer.goto(screen_x, screen_y-LABEL_FROM_AXIS)
+    pointer.write(label_text, align="center")
 
 
 def draw_y_axis_tick(pointer, screen_x, screen_y):
@@ -170,7 +173,7 @@ def draw_y_axis_label(pointer, screen_x, screen_y, label_text):
     """
     # this goes to specified x and y location and writes text on the left side of y axis.
     pointer.penup()
-    pointer.goto(screen_x - HALF_OF_TICK, screen_y)
+    pointer.goto(screen_x - LABEL_FROM_AXIS, screen_y)
     pointer.write(label_text)
 
 
@@ -183,7 +186,18 @@ def draw_x_axis(pointer, x_origin, y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: None (just draws in turtle)
     """
-    pass
+    # draw x axis
+    draw_line(pointer, ZERO, y_origin, WIDTH, y_origin)
+    # calculates minimum and maximum x values
+    min_x, max_x = calc_minmax_x(x_origin, ratio)
+    # x begins at minimum x value
+    x = min_x
+    # loops until the x value is smaller or equal to max_x
+    while x <= max_x:
+        screen_x, screen_y = calc_to_screen_coord(x, ZERO, x_origin, y_origin, ratio)
+        draw_x_axis_tick(pointer, screen_x, screen_y)
+        draw_x_axis_label(pointer, screen_x, screen_y, x)
+        x = x+1
 
 
 def draw_y_axis(pointer, x_origin, y_origin, ratio):
@@ -257,6 +271,7 @@ def main():
     # Get configuration
     x_origin, y_origin = eval(input("Enter pixel coordinates of chart origin (x,y): "))
     ratio = int(input("Enter ratio of pixels per step: "))
+    draw_x_axis(pointer, x_origin, y_origin, ratio)
 
     # Draw axis
     pointer.color(AXIS_COLOR)
