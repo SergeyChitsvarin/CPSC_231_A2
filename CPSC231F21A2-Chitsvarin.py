@@ -58,14 +58,26 @@ def calc_to_screen_coord(x, y, x_origin, y_origin, ratio):
 
 
 def calculate_min_value(origin, ratio):
-    x = (ZERO - origin)/ratio
-    min_value = int(floor(x))
+    """
+    Calculate smallest INTEGER (x or y) value to draw based on formula given in the assignment
+    :param origin: Pixel (x or y) origin of pixel coordinate system
+    :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
+    :return: min_value: Smallest (x or y) value to draw for a 0->WIDTH of screen
+    """
+    to_be_floored = (ZERO - origin)/ratio
+    min_value = int(floor(to_be_floored))
     return min_value
 
 
 def calculate_max_value(origin, ratio):
-    x = (WIDTH - origin)/ratio
-    max_value = int(ceil(x))
+    """
+    Calculate largest INTEGER (x or y) value to draw based on formula given in the assignment
+    :param origin: Pixel (x or y) origin of pixel coordinate system
+    :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
+    :return: max_value: Largest (x or y) value to draw for a 0->WIDTH of screen
+    """
+    to_be_ceiled = (WIDTH - origin)/ratio
+    max_value = int(ceil(to_be_ceiled))
     return max_value
 
 
@@ -79,10 +91,8 @@ def calc_minmax_x(x_origin, ratio):
     :return: (Smallest, Largest) x value to draw for a 0->WIDTH of screen
     """
     # calculates min and max values and returns them for x axis
-
     min_x_value = calculate_min_value(x_origin, ratio)
     max_x_value = calculate_max_value(x_origin, ratio)
-
     return min_x_value, max_x_value
 
 
@@ -111,9 +121,12 @@ def draw_line(pointer, screen_x1, screen_y1, screen_x2, screen_y2):
     :param screen_y2: The pixel y of line end
     :return: None (just draws in turtle)
     """
+    # go to starting point
     pointer.penup()
     pointer.goto(screen_x1, screen_y1)
+    # put pen down
     pointer.pendown()
+    # go to line end point
     pointer.goto(screen_x2, screen_y2)
     pointer.penup()
 
@@ -247,15 +260,22 @@ def draw_expression(pointer, expr, colour, x_origin, y_origin, ratio):
     :param ratio: Ratio of pixel coordinate system (each 1 in calculator is worth ratio amount of pixels)
     :return: None (just draws in turtle)
     """
+    # sets colour of the pointer
     pointer.color(colour)
+    # takes and defines min and max x values
     min_x, max_x = calc_minmax_x(x_origin, ratio)
     x = min_x
+    # loops from minimum x to maximum x
     while x <= max_x:
+        # establishes y value using the calc function
         y = calc(expr, x)
+        # finds coordinates on the screen and goes there
         screen_x, screen_y = calc_to_screen_coord(x, y, x_origin, y_origin, ratio)
         pointer.goto(screen_x, screen_y)
         pointer.pendown()
+        # uses delta of 0.1 to make change to a different x smooth
         x = x + 0.1
+    # after finishing drawing the expressions moves the pen up
     pointer.penup()
 # YOU SHOULD NOT NEED TO CHANGE ANYTHING BELOW THIS LINE UNLESS YOU ARE DOING THE BONUS
 
