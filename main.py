@@ -1,11 +1,13 @@
 # COURSE CPSC 231 FALL 2021
 # INSTRUCTOR: Jonathan Hudson
-# Tutorial: Wei Wei
+# Tutorial: 02
 # ID: 30154758
-# Date: 2021/10/09
-# Description:
-
-import math
+# Date: 2021/10/22
+# Description:This program is a graphing calculator, it takes input from user such as: origin(x,y), ratio of pixels per step and arithmetic expressions.
+# using these inputs the program creates a graph with the expressions in 3 alternating colours.
+# references:
+# 1) import math so that sin/tan/cos works https://stackoverflow.com/questions/8783261/python-math-module
+from math import *
 import turtle
 
 # Constants
@@ -56,12 +58,12 @@ def calc_to_screen_coord(x, y, x_origin, y_origin, ratio):
 
 
 def calculate_min_value(origin, ratio):
-    min_value = int(math.floor(-origin/ratio))
+    min_value = int(floor(-origin/ratio))
     return min_value
 
 
 def calculate_max_value(origin, ratio):
-    max_value = int(math.ceil(origin/ratio))
+    max_value = int(ceil(origin/ratio))
     return max_value
 
 
@@ -249,7 +251,7 @@ def draw_expression(pointer, expr, colour, x_origin, y_origin, ratio):
         screen_x, screen_y = calc_to_screen_coord(x, y, x_origin, y_origin, ratio)
         pointer.goto(screen_x, screen_y)
         pointer.pendown()
-        x = x + 1
+        x = x + 0.1
     pointer.penup()
 # YOU SHOULD NOT NEED TO CHANGE ANYTHING BELOW THIS LINE UNLESS YOU ARE DOING THE BONUS
 
